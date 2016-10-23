@@ -15,6 +15,7 @@ object Compiler {
   def main(args: Array[String]): Unit = {
     checkFile(args)
     readFile(args(0))
+    takeFileContents(args(0))
 
     Scanner.getNextToken()
 
@@ -35,5 +36,12 @@ object Compiler {
       System.exit(1)
     }
   }
+
+  // read file content by calling add char then get char then get next token and
+// if it starts with / then read until it has space and then use look up table to figure out if it works
+  def takeFileContents(file : String)={
+
+
+}
 
 }
