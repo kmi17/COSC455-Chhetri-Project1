@@ -86,39 +86,47 @@
     }
 
     override def innerText(): Unit = {
-      variableUse()
-      innerText()
-      //or
-      heading()
-      innerText()
-      //or
-      bold()
-      innerText()
-      //or
-      italics()
-      innerText()
-      //or
-      listItem()
-      innerText()
-      //or
-      image()
-      innerText()
-      //or
-      link()
-      innerText()
-      //or
-      newline()
-      innerText()
-      //or
 
-      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TEXT)) {
-        parseTree.push(CONSTANTS.TEXT)
+
+      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+        variableUse()
         innerText()
-        Compiler.Scanner.getNextToken()
-      } else {
-        println("Syntax Error")
-        System.exit(1)
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+        heading()
+        innerText()
+        //or
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+        bold()
+        innerText()
+        //or
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+        italics()
+        innerText()
+        //or
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+        listItem()
+        innerText()
+        //or
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
+
+        image()
+        innerText()
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
+        //or
+        link()
+        innerText()
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+        //or
+        newline()
+        innerText()
+        //or
+      } else{
+        text()
+        innerText()
       }
+      println("Syntax Error")
+      System.exit(1)
+
     }
 
     override def heading(): Unit = {
@@ -423,6 +431,10 @@
 
     }
 
+    def reqtext(): Unit = {
+
+    }
+
 
     def alphabets(): Unit ={
       for (alphabets <- 'a' to 'z') {
@@ -459,5 +471,9 @@
           System.exit(1)
         }
     }
+
+
+
+
 
   }
