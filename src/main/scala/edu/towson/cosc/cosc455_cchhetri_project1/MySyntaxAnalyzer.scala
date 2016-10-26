@@ -36,33 +36,51 @@
         parseTree.push(CONSTANTS.TITLEB)
         Compiler.Scanner.getNextToken()
 
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-          parseTree.push(CONSTANTS.REQTEXT)
+        reqtext()
+
+
+        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
+          parseTree.push(CONSTANTS.BRACKETE)
           Compiler.Scanner.getNextToken()
 
-          if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
-            parseTree.push(CONSTANTS.BRACKETE)
-            Compiler.Scanner.getNextToken()
-          } else {
-            println("Syntax Error")
-            System.exit(1)
-          }
         } else {
           println("Syntax Error")
           System.exit(1)
         }
-      } else {
-        println("Syntax Error")
-        System.exit(1)
       }
+
     }
 
 
     override def body(): Unit = {
-      innerText()
-      body()
+      if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
 
-    }
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
+
+
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
+
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+
+
+      } else{
+        text()
+        innerText()
+
+
+
+      }
+
+
+      }
+
+
+
 
     override def paragraph(): Unit = {
 
@@ -119,13 +137,13 @@
         //or
         newline()
         innerText()
-        //or
-      } else{
+
+      } else {
         text()
         innerText()
       }
-      println("Syntax Error")
-      System.exit(1)
+     /* println("Syntax Error")
+      System.exit(1)*/
 
     }
 
@@ -133,18 +151,13 @@
       if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
         parseTree.push(CONSTANTS.HEADING)
         Compiler.Scanner.getNextToken()
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-          parseTree.push(CONSTANTS.REQTEXT)
 
-        } else {
-          println("Syntax Error")
-          System.exit(1)
-        }
-
+        reqtext()
       } else {
         println("Syntax Error")
         System.exit(1)
       }
+
     }
 
     override def variableDefine(): Unit = {
@@ -152,29 +165,19 @@
         parseTree.push(CONSTANTS.DEFB)
         Compiler.Scanner.getNextToken()
 
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-          parseTree.push(CONSTANTS.REQTEXT)
+        reqtext()
+
+        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.EQSIGN)) {
+          parseTree.push(CONSTANTS.EQSIGN)
           Compiler.Scanner.getNextToken()
+          reqtext()
+          if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
+            parseTree.push(CONSTANTS.BRACKETE)
 
-          if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.EQSIGN)) {
-            parseTree.push(CONSTANTS.EQSIGN)
+            variableDefine()
+
             Compiler.Scanner.getNextToken()
-            if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-              parseTree.push(CONSTANTS.REQTEXT)
-              Compiler.Scanner.getNextToken()
-              if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
-                parseTree.push(CONSTANTS.BRACKETE)
-                variableDefine()
-                Compiler.Scanner.getNextToken()
 
-              } else {
-                println("Syntax Error")
-                System.exit(1)
-              }
-            } else {
-              println("Syntax Error")
-              System.exit(1)
-            }
 
           } else {
             println("Syntax Error")
@@ -195,17 +198,10 @@
         parseTree.push(CONSTANTS.USEB)
         Compiler.Scanner.getNextToken()
 
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-          parseTree.push(CONSTANTS.REQTEXT)
+        reqtext()
+        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
+          parseTree.push(CONSTANTS.BRACKETE)
           Compiler.Scanner.getNextToken()
-
-          if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BRACKETE)) {
-            parseTree.push(CONSTANTS.BRACKETE)
-            Compiler.Scanner.getNextToken()
-          } else {
-            println("Syntax Error")
-            System.exit(1)
-          }
         } else {
           println("Syntax Error")
           System.exit(1)
@@ -214,22 +210,18 @@
         println("Syntax Error")
         System.exit(1)
       }
+
     }
 
     override def bold(): Unit = {
       if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
         parseTree.push(CONSTANTS.BOLD)
         Compiler.Scanner.getNextToken()
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TEXT)) {
-          parseTree.push(CONSTANTS.TEXT)
+        text()
+        Compiler.Scanner.getNextToken()
+        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+          parseTree.push(CONSTANTS.BOLD)
           Compiler.Scanner.getNextToken()
-          if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
-            parseTree.push(CONSTANTS.BOLD)
-            Compiler.Scanner.getNextToken()
-          } else {
-            println("Syntax Error")
-            System.exit(1)
-          }
         } else {
           println("Syntax Error")
           System.exit(1)
@@ -238,6 +230,7 @@
         println("Syntax Error")
         System.exit(1)
       }
+
     }
 
 
@@ -247,9 +240,7 @@
         Compiler.Scanner.getNextToken()
         // add it  so that u can build a parse tree
 
-        if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TEXT)) {
-          parseTree.push(CONSTANTS.TEXT)
-          Compiler.Scanner.getNextToken()
+        text()
 
           if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
             parseTree.push(CONSTANTS.ITALICS)
@@ -262,10 +253,7 @@
           println("Syntax Error")
           System.exit(1)
         }
-      } else {
-        println("Syntax Error")
-        System.exit(1)
-      }
+
     }
 
 
@@ -273,7 +261,7 @@
       if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
         parseTree.push(CONSTANTS.LISTITEM)
         Compiler.Scanner.getNextToken()
-        // add it  so that u can build a parse tree
+
         innerItem()
         listItem()
       } else {
@@ -283,28 +271,28 @@
     }
 
     override def innerItem(): Unit = {
-      variableUse()
-      innerItem()
-      //or
-      bold()
-      innerItem()
-      //or
-      italics()
-      innerItem()
-      //or
-      link()
-      innerItem()
-      //or
-      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
-        parseTree.push(CONSTANTS.REQTEXT)
-        Compiler.Scanner.getNextToken()
-        // add it  so that u can build a parse tree
-        innerItem()
+      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
 
+        variableUse()
+        innerItem()
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+        //or
+        bold()
+        innerItem()
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+        //or
+        italics()
+        innerItem()
+      } else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
+        //or
+        link()
+        innerItem()
       } else {
-        println("Syntax Error")
-        System.exit(1)
+        reqtext()
+        innerItem()
       }
+      /*println("Syntax Error")
+      System.exit(1)*/
     }
 
     override def link(): Unit = {
@@ -424,30 +412,33 @@
 
     def text(): Unit = {
 
-      alphabets()
-      numbers()
-      strExtraText()
+      alphabetsTXT()
+      numbersTXT()
+      strExtraTXT()
 
 
     }
 
     def reqtext(): Unit = {
-
+      alphabets()
+      numbers()
+      strExtraText()
     }
 
 
-    def alphabets(): Unit ={
+    def alphabets(): Unit = {
       for (alphabets <- 'a' to 'z') {
 
         if (Compiler.currentToken.equals(alphabets)) {
           val charToStr = alphabets.toString
           parseTree.push(charToStr)
-        }else{
+        } else {
           println("Syntax Error")
           System.exit(1)
         }
       }
     }
+
     def numbers(): Unit = {
       for (numbers <- 0 to 9) {
         val intToStr = numbers.toString
@@ -457,8 +448,9 @@
         }
       }
     }
+
     def strExtraText(): Unit = {
-      val strList: List[String] = List(",", ".", "?", "_", "/","""""")
+      val strList: List[String] = List(",", ".", "?", "_", "/", " \" ")
       for (i <- 0 until strList.length - 1)
         if (Compiler.currentToken.equals(strList {
           i
@@ -473,7 +465,39 @@
     }
 
 
+    def alphabetsTXT(): Unit = {
+      for (alphabets <- 'a' to 'z') {
 
+        if (Compiler.currentToken.equals(alphabets)) {
+          val charToStr = alphabets.toString
+          parseTree.push(charToStr)
 
+        }
+      }
+    }
 
+    def numbersTXT(): Unit = {
+      for (numbers <- 0 to 9) {
+        val intToStr = numbers.toString
+        if (Compiler.currentToken.equals(intToStr)) {
+          val charToStr = intToStr.toString
+          parseTree.push(intToStr)
+        }
+      }
+    }
+
+    def strExtraTXT(): Unit = {
+      val strList: List[String] = List(",", ".", "?", "_", "/", " \" ")
+      for (i <- 0 until strList.length - 1)
+        if (Compiler.currentToken.equals(strList {i})) {
+          parseTree.push(strList {i})
+
+        }
+    }
   }
+
+
+
+
+
+

@@ -15,7 +15,7 @@ object Compiler {
   def main(args: Array[String]): Unit = {
     checkFile(args)
     readFile(args(0))
-    takeFileContents(args(0))
+
 
     Scanner.getNextToken()
 

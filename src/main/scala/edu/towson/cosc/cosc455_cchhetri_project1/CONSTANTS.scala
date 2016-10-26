@@ -5,12 +5,12 @@ package edu.towson.cosc.cosc455_cchhetri_project1
   */
 object CONSTANTS {
 
-  val DOCB: String = "\BEGIN"
+  val DOCB: String = "\\BEGIN"
   val DOCE : String = 	"\\END"
   val TITLEB : String = "\\TITLE["
   val BRACKETE : String = "]"
   val HEADING : String = "#"
-  val PARAB: String = "\PARAB"
+  val PARAB: String = "\\PARAB"
   val PARAE : String = "PARAE"
   val BOLD : String = "**"
   val ITALICS : String = "*"
@@ -20,11 +20,8 @@ object CONSTANTS {
   val ADDRESSB : String = "("
   val ADDRESSE : String = ")"
   val IMAGEB : String = "!["
-  val DEFB : String = "\DEF["
+  val DEFB : String = "\\DEF["
   val EQSIGN : String = "="
-  val USEB : String = "\USE["
-  val REQTEXT : String = " "
-  // define
-  val TEXT : String = " "
+  val USEB : String = "\\USE["
 
 }
