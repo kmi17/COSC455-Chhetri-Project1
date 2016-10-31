@@ -452,12 +452,8 @@
     def strExtraText(): Unit = {
       val strList: List[String] = List(",", ".", "?", "_", "/", " \" ")
       for (i <- 0 until strList.length - 1)
-        if (Compiler.currentToken.equals(strList {
-          i
-        })) {
-          parseTree.push(strList {
-            i
-          })
+        if (Compiler.currentToken.equals(strList {i})) {
+          parseTree.push(strList {i})
         } else {
           println("Syntax Error")
           System.exit(1)

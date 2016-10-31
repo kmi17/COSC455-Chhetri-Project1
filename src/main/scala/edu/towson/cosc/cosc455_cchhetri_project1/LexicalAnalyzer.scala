@@ -5,8 +5,8 @@ package edu.towson.cosc.cosc455_cchhetri_project1
   */
 trait LexicalAnalyzer {
 
-    def addChar() : Unit
+    def addChar(x:Char) : String
     def getChar() : Char
     def getNextToken() : Unit
-    def lookup() : Boolean
+    def lookup(y:String) : Boolean
 }

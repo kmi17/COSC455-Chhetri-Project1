@@ -10,14 +10,14 @@ object Compiler {
 
   val Scanner = new MyLexicalAnalyzer
   val Parser = new MySyntaxAnalyzer
-  val SemanticAnalyzer = new MySyntaxAnalyzer
+  val SemanticAnalyzer = new MySemanticAnalyzer
 
   def main(args: Array[String]): Unit = {
     checkFile(args)
     readFile(args(0))
-
-
-    Scanner.getNextToken()
+    val next = Scanner.getNextToken()
+    Parser.gittex()
+    SemanticAnalyzer.openHTMLFileInBrowser("")
 
   }
 
@@ -39,9 +39,16 @@ object Compiler {
 
   // read file content by calling add char then get char then get next token and
 // if it starts with / then read until it has space and then use look up table to figure out if it works
-  def takeFileContents(file : String)={
+
+  var s = new MyLexicalAnalyzer()
+  s.start(fileContents:String)
 
 
-}
+
+
+
+
+
+
 
 }
